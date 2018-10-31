@@ -25,6 +25,7 @@ namespace MVC_Test.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Student student)
         {
             try
