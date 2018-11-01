@@ -61,19 +61,63 @@
     </div>
 </div>
 @section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#form1").submit(function (event) {
-                event.preventDefault();
-                $.ajax({
-                    url: '/Student/Create',
-                    data: $('#form1').serialize(),
-                    method: 'POST',
-                    success: function (result) {
-                        console.log(result);
-                        $('#myModal').modal('hide');
+            //$("#form1").submit(function (event) {
+            //    event.preventDefault();
+            //    $.ajax({
+            //        url: '/Student/Create',
+            //        data: $('#form1').serialize(),
+            //        method: 'POST',
+            //        success: function (result) {
+            //            console.log(result);
+            //            $('#myModal').modal('hide');
+            //        }
+            //    });
+            //});
+            $('#form1').validate({
+                rules: {
+                    "HoTen": {
+                        required: true,
+                    },
+                    "DiemToan": {
+                        required: true,
+                    },
+                    "DiemLy": {
+                        required: true,
+                    },
+                    "DiemHoa": {
+                        required: true,
                     }
-                });
+                },
+                messages: {
+                    "HoTen": {
+                        required: "Chưa nhập",
+                    },
+                    "DiemToan": {
+                        required: "Chưa nhập",
+                    },
+                    "DiemLy": {
+                        required: "Chưa nhập",
+                    },
+                    "DiemHoa": {
+                        required: "Chưa nhập",
+                    }
+                },
+                submitHandler: function (form) {
+                    //form.submit();
+                    //$(Location.SELECTORS.btnConfirm).button('loading');
+                    $.ajax({
+                        url: '/Student/Create',
+                        data: $('#form1').serialize(),
+                        method: 'POST',
+                        success: function (result) {
+                            console.log(result);
+                            $('#myModal').modal('hide');
+                        }
+                    });
+                }
             });
 
             $('#btnConfirm').click(function () {
